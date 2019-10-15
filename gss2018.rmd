@@ -36,12 +36,20 @@ levels(mydata4$VOTE12)[2] <- "no in 12"
 
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?!-->
 
-This data is from the 2018 General Social Survey. The first blocks of R-code has selected down a subset of the data to just 15 variables. It has further removed unwanted factor levels in much of the data. Examine that code to see what it is doing. Finally address this question.  Is opinion on the death penalty (CAPPUN) independent of gun ownership (OWNGUN)?
+This data is from the 2018 General Social Survey.
+
+The first question is this: Is opinion on the death penalty (CAPPUN) independent of gun ownership (OWNGUN)?
+
+$H_0$ : There is no relationship between gun ownership and whether one is in favor of capital punishment.
+
+$H_A$ : There is a relationship between gun ownership and whether one is in favor of capital punishment.
 
 
 ## Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
+
+Both variables in this analysis are categorical; hence we use bar graphs and tables to summarize the data, and a cross-tabulation for a numerical summary. A chi-squared test will be used to infer whether or not there is a relationship between the variables.
 
 ##Results
 
@@ -53,23 +61,47 @@ This data is from the 2018 General Social Survey. The first blocks of R-code has
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+barchartGC(~CAPPUN+OWNGUN, data=mydata4, main='Gun Ownership and Capital Punishment', type='Percent', xlab='Capital Punishment')
+```
+
+This barchart shows that those who oppose Capital Punishment do not have gun ownership and those who do favor Capital Punishment and are not gun owners have a slightly higher percent then those who do own guns.
+
 #### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+tab1 = xtabs(~CAPPUN+OWNGUN, data=mydata4)
+rowPerc(tab1)
+
+```
+Based on this table, having gun ownership and opposing capital punishment is low percentage as not having gun ownership and opposing capital punishment has a high percentage.The results show there is a relationship between gun ownership and in favor of capital punishment.
+
 ### Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+
+```{r}
+chisqtestGC(tab1)
+```
+The P-Value for the chisq test is 0.02 < 0.05 so we reject the null hypothesis and conclude we have evidence to support the contention that gun ownership and whether on favors Capital Punishment are related.                       
 
 # Introduction Question 2
 
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?!-->
 
-Now answer Is belief in the bigbang theory (BIGBANG) independent of belief in the afterlife (POSTLIFE)
+The second question is this: Is belief in the bigbang theory (BIGBANG) independent of belief in the afterlife (POSTLIFE)?
+
+$H_0$ : There is no relationship between the opinion on the big bang theory and the belief in the afterlife.
+
+$H_A$ : There is a relationship between the opinion on the big bang theory and the belief in the afterlife.
 
 ## Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
+
+Both variables in this analysis are categorical; hence we use bar graphs and tables to summarize the data, and a cross-tabulation for a numerical summary. A chi-squared test will be used to infer whether or not there is a relationship between the variables.
 
 ##Results
 
@@ -81,23 +113,46 @@ Now answer Is belief in the bigbang theory (BIGBANG) independent of belief in th
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+barchartGC(~BIGBANG+POSTLIFE, data=mydata4, main='Big Bang Theory vs Post Life', type='Percent', xlab='Big Bang Theory')
+```
+
+This barchart shows those who believe in post life also believe in the Big Bang Theory.
+
 #### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+tab1 = xtabs(~BIGBANG+POSTLIFE, data=mydata4)
+rowPerc(tab1)
+```
+This table shows that those who believe in the afterlife highly favor and highly oppose the big bang theory and those who do not believe in the afterlife neither really favor or oppose the big bang theory.
+
 ### Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+
+```{r}
+chisqtestGC(tab1)
+```
+The P-Value for the chisq test is 0.08 < 0.05 so we fail to reject the null hypothesis and conclude we have evidence to support the contention that post life and whether on belief of the Big Bang Theory are not related.
 
 # Introduction Question 3
 
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?!-->
 
-Finally determine if a persons opinion on death penalty (CAPPUN) is independent of their race (RACE).
+The third question is this: If a persons opinion on death penalty (CAPPUN) is independent of their race (RACE).
+
+$H_0$ : There is no relationship between the opinion on the death penalty is independent of their race.
+
+$H_A$ : There is a relationship between the opinion on the death penalty is independent of their race.
 
 ## Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
+
+Both variables in this analysis are categorical; hence we use bar graphs and tables to summarize the data, and a cross-tabulation for a numerical summary. A chi-squared test will be used to infer whether or not there is a relationship between the variables.
 
 ##Results
 
@@ -109,16 +164,33 @@ Finally determine if a persons opinion on death penalty (CAPPUN) is independent 
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+barchartGC(~CAPPUN+RACE, data=mydata4, main='Death Penalty vs Race', type='Percent', xlab='Death Penalty')
+```
+
+This barchart shows that the race "white" has a higher percentage in favor and oppose of the death penalty compared to the races "black" and "other". The race "black" has a higher percentage in opposing the death penalty than in favor. The "other" races favor the death penalty rather than opposing.
+
 #### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+
+```{r}
+tab1 = xtabs(~CAPPUN+RACE, data=mydata4)
+rowPerc(tab1)
+```
+This table shows that the race "white" both highly favor and opposes capital punishment. The race "black" opposes capital punishment more as the "other" races favor capital punishment.
 
 ### Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
+```{r}
+chisqtestGC(tab1)
+```
+The P-Value for the chisq test is 0.00009 < 0.05 so we reject the null hypothesis and conclude we have evidence to support the contention between race and opinion of the death penalty.
 
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
 
+The first and third question show strong relationships on the two variables as they both reject the null hypothesis and are questions aimed possibly towards social rules and settings. However, when looking at question two regarding the big bang theory and the belief in afterlife, the data fails to reject the null hypothesis. This could be caused by the question which compares a science to a religion as the data shows how they are clearly independent as the two are considered seperate.
